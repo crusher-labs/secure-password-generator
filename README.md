@@ -27,4 +27,4 @@ A client-side web tool to generate strong, cryptographically random passwords to
 ## **Live Tool**
 
 You can access the live tool here:
-👉 [**Secure Password Generator**](https://itxcrusher.github.io/secure-password-generator/)
+👉 [**Secure Password Generator**](https://crusher-labs.github.io/secure-password-generator/)

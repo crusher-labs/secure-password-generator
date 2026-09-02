@@ -1,30 +1,25 @@
-# **Secure Password Generator**
+# Secure Password Generator
 
-A client-side web tool to generate strong, cryptographically random passwords to enhance your online security.
+Spin a spy-proof safe dial to generate a strong password from crypto.getRandomValues; tumblers pick the character sets, bolts show the entropy, the key engraves on a brass plate.
 
----
+Live: <https://crusher-labs.github.io/secure-password-generator/>
 
-## **Features**
+## The world: Combination dial
 
-* **Strong & Random:** Uses the browser’s `window.crypto` API for cryptographically secure random number generation.
-* **Customizable:** Easily control the password length (from 8 to 32 characters).
-* **Character Sets:** Choose to include uppercase letters, lowercase letters, numbers, and symbols.
-* **One-Click Copy:** Instantly copy the generated password to your clipboard.
-* **No Server Interaction:** All generation happens in your browser. Your passwords are never sent over the internet.
+This tool is a **world page** (crusher-labs standard since 2026-09-02): the page is a committed physical object from the tool's own world, with its own CSS, fonts and mode. It does not load `crusher-ui-kit` and has no theme switcher. The brief for this world lives in the workspace atlas (`x:/crusher-labs/docs/context/tools-theme-atlas.md`); change the atlas before changing the world.
 
----
+## Privacy
 
-## **How to Use**
+This tool runs entirely in your browser. There is no server. No data is uploaded, no telemetry, no analytics. The only network requests fired are the page-load fetches for Google Fonts; your inputs and outputs never leave the tab. The "Suggest an improvement" form posts to Web3Forms only when you submit it.
 
-1. **Open the Tool:** Navigate to the live URL.
-2. **Set Options:** Adjust the slider to your desired password length.
-3. **Select Characters:** Check the boxes for the character types you want to include.
-4. **Generate:** Click the “Generate Password” button. A new password will appear.
-5. **Copy:** Click the copy icon next to the password to copy it to your clipboard.
+## Contract
 
----
+Validated by `tools-hub/scripts/check-static.mjs` (world-page contract: SEO block, CSP, feedback form, hub link, prose + FAQ, no kit pins). Run `npm run check:static` from `repos/tools-hub` before committing.
 
-## **Live Tool**
+## Development
 
-You can access the live tool here:
-👉 [**Secure Password Generator**](https://crusher-labs.github.io/secure-password-generator/)
+Open `index.html` directly in a browser. No build, no dependencies. Verify at 1440 and 390 via Playwright `setViewportSize` before shipping.
+
+## License
+
+MIT.

@@ -1,483 +1,181 @@
 <!DOCTYPE html>
-<html lang="en"
-      data-default-theme="minimal"
-      data-theme-lock="minimal"
-      data-default-mode="dark"
-      data-default-brand="#0ea5e9">
+<html lang="en" data-world="combination-dial">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Password Generator</title>
+    <title>Secure Password Generator - Random, Strong, Made in Your Browser</title>
     <!-- SEO-META-START -->
-    <meta name="description" content="Create strong, cryptographically random passwords with custom options.">
-    <meta name="theme-color" content="#0ea5e9">
+    <meta name="description" content="Spin the dial to generate a strong random password from your browser’s cryptographic generator. Choose character sets and length, see the strength in bolts, copy the key. Nothing leaves the vault.">
+    <meta name="theme-color" content="#23272d">
     <link rel="canonical" href="https://crusher-labs.github.io/secure-password-generator/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Web Utility Tools by CRUSHER">
-    <meta property="og:title" content="Secure Password Generator — Web Utility Tools by CRUSHER">
-    <meta property="og:description" content="Create strong, cryptographically random passwords with custom options.">
+    <meta property="og:title" content="Secure Password Generator - Web Utility Tools by CRUSHER">
+    <meta property="og:description" content="Spin the dial to generate a strong random password from your browser’s cryptographic generator. Choose character sets and length, see the strength in bolts, copy the key. Nothing leaves the vault.">
     <meta property="og:url" content="https://crusher-labs.github.io/secure-password-generator/">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Secure Password Generator — Web Utility Tools by CRUSHER">
-    <meta name="twitter:description" content="Create strong, cryptographically random passwords with custom options.">
+    <meta name="twitter:title" content="Secure Password Generator - Web Utility Tools by CRUSHER">
+    <meta name="twitter:description" content="Spin the dial to generate a strong random password from your browser’s cryptographic generator. Choose character sets and length, see the strength in bolts, copy the key. Nothing leaves the vault.">
     <!-- SEO-META-END -->
     <link rel="icon" href="data:,">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://unpkg.com https://api.web3forms.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.web3forms.com; object-src 'none'; base-uri 'self';">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/crusher-ui-kit@1.2.1/dist/crusher-ui.min.css" integrity="sha384-Y8s5q9n5rodpO7nSyRNxbxlns7zYnuOEymBbSwEg9GmW2R/Zt3U4BWOZLb3q2NjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/crusher-ui-kit@1.2.1/dist/themes/minimal.css" integrity="sha384-FLhZ0Qhy8nUbGu4oSm0Vs5uPCL1RgZn+Ld2/fj3PrYDUMqltf2vObwpWHiOzRx4l" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/crusher-ui-kit@1.2.1/dist/static/tool-shell.css" integrity="sha384-mWfiqr7mGlAa+yVw+7vt40gfFTtAhs2jjBYbTLTvNRYUtZEtAJ0YPHlTdB8kuhSE" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/crusher-ui-kit@1.2.1/dist/static/tool-shell.js" integrity="sha384-gNDnPKn5AoF0e4Q555fGbM+snO+UCP3/z4ErG3cyS/Akusg/bzTO+AYmG1WAMnab" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=JetBrains+Mono:wght@600&family=Public+Sans:wght@400;600&display=swap">
     <style>
-        body {
-        font-family: 'Inter', sans-serif;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-    /* === Premium polish (2026-05-14) === */
-    body { position: relative; isolation: isolate; }
-    body::before {
-        content: '';
-        position: fixed;
-        inset: 0 0 auto 0;
-        block-size: 32rem;
-        background:
-            radial-gradient(ellipse 70% 50% at 50% -5%,
-                color-mix(in srgb, var(--crusher-color-brand-primary) 18%, transparent),
-                transparent 65%);
-        pointer-events: none;
-        z-index: -1;
-        opacity: 0.85;
-    }
-    ::selection { background: color-mix(in srgb, var(--crusher-color-brand-primary) 30%, transparent); }
-        /* PREMIUM-INPUT-START (until framework-feedback Section 6 ships) */
-        .crusher-tool-control {
-            background: color-mix(in srgb, var(--crusher-background-surface) 72%, transparent);
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-            border: 1px solid color-mix(in srgb, var(--crusher-border-primary) 70%, transparent);
-            color: var(--crusher-text-primary);
-            padding: var(--crusher-spacing-3) var(--crusher-spacing-4);
-            border-radius: var(--crusher-radius-lg);
-            font-family: inherit;
-            font-size: 0.9375rem;
-            line-height: 1.5;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-        }
-        .crusher-tool-control:hover { border-color: var(--crusher-border-primary); }
-        .crusher-tool-control:focus-visible {
-            border-color: var(--crusher-color-brand-primary);
-            box-shadow: 0 0 0 4px color-mix(in srgb, var(--crusher-color-brand-primary) 18%, transparent);
-            outline: none;
-            background: var(--crusher-background-surface);
-        }
-        .crusher-tool-control::placeholder {
-            color: var(--crusher-text-secondary);
-            opacity: 0.7;
-        }
-        .crusher-tool-control:focus::placeholder { opacity: 0.4; }
-        textarea.crusher-tool-control { resize: vertical; min-block-size: 4.5rem; }
-        /* PREMIUM-INPUT-END */
-    .crusher-tool-title {
-        font-family: 'Fraunces', 'Georgia', serif;
-        font-optical-sizing: auto;
-        font-variation-settings: 'opsz' 48, 'SOFT' 30;
-        font-weight: 500;
-        font-style: normal;
-        font-size: clamp(2rem, 4.5vw, 3rem);
-        line-height: 1.05;
-        letter-spacing: -0.025em;
-    }
-    .crusher-tool-action {
-        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
-    .crusher-tool-action:hover:not([disabled]) {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--crusher-color-brand-primary) 35%, transparent);
-    }
-        .tool-mono { font-family: 'JetBrains Mono', monospace; }
 
-        .tool-stack { display: grid; gap: var(--crusher-spacing-6); max-width: 36rem; margin-inline: auto; }
+    :root { --d:340px; --steel:#23272d; --steel-hi:#343941; --brass:#c9a24b; --brass-hi:#d9b45c; --brass-lo:#7a5c1c; --plate-ink:#2a1f08; --text:#e8e6df; --muted:#b9bcc4; --face:#1b1e23; --edge:#3a3f46; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; color:var(--text); font-family:'Public Sans', system-ui, sans-serif;
+      background: repeating-linear-gradient(90deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 3px), linear-gradient(180deg, var(--steel-hi), var(--steel) 45%, #1b1e23); background-attachment:fixed; }
+    .rivet { position:fixed; width:18px; height:18px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #8d9299, #3a3f46 70%); box-shadow:0 1px 2px rgba(0,0,0,0.8), inset 0 -1px 2px rgba(0,0,0,0.6); z-index:3; }
+    main { max-width:960px; margin:0 auto; padding:52px 24px 60px; }
+    .plate { padding:20px 28px; background:linear-gradient(180deg, var(--brass-hi), #b98f36 55%, #d1ab52); color:var(--plate-ink); text-align:center; border:2px solid var(--brass-lo); box-shadow:0 4px 0 #5a4212, 0 14px 30px -14px rgba(0,0,0,0.9); position:relative; }
+    .plate::before, .plate::after { content:''; position:absolute; top:50%; width:10px; height:10px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #fff1c6, var(--brass-lo) 75%); transform:translateY(-50%); }
+    .plate::before { left:10px; } .plate::after { right:10px; }
+    h1 { margin:0; font-family:'Cinzel', Georgia, serif; font-weight:700; font-size:clamp(20px, 3.4vw, 34px); letter-spacing:.14em; text-transform:uppercase; text-shadow:0 1px 0 rgba(255,255,255,0.45), 0 -1px 0 rgba(0,0,0,0.35); }
+    .sub { margin:6px 0 0; font-size:13px; letter-spacing:.2em; text-transform:uppercase; color:#4a3810; }
+    .stage { display:grid; grid-template-columns:var(--d) 1fr; gap:48px; align-items:center; margin-top:56px; }
+    .dialwrap { position:relative; width:var(--d); height:var(--d); margin:0 auto; }
+    .ring { position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 50% 50%, #0f1114 55%, #1b1e23 56%, #0a0b0d 100%); box-shadow:0 0 0 6px #2c3036, 0 0 0 8px #0d0f11, 0 20px 40px -10px rgba(0,0,0,0.9), inset 0 0 30px rgba(0,0,0,0.9); transition:transform 1.4s cubic-bezier(.2,.9,.25,1); }
+    .ring .num { position:absolute; left:50%; top:50%; width:24px; margin-left:-12px; text-align:center; font:700 13px 'Cinzel', serif; color:#f2f0ea; }
+    .ring .tick { position:absolute; left:50%; top:0; width:2px; height:14px; background:#f2f0ea; margin-left:-1px; transform-origin:50% calc(var(--d) / 2); opacity:.85; }
+    .ring .tick.s { height:7px; opacity:.45; }
+    .knob { position:absolute; left:50%; top:50%; width:42%; height:42%; transform:translate(-50%,-50%); border-radius:50%; border:none; padding:0; background:radial-gradient(circle at 35% 30%, #f0d48a, #b98f36 45%, var(--brass-lo) 80%, #5a4212); box-shadow:0 6px 14px rgba(0,0,0,0.7), inset 0 2px 4px rgba(255,255,255,0.35); cursor:pointer; display:flex; align-items:center; justify-content:center; }
+    .knob::after { content:''; width:56%; height:10px; background:linear-gradient(180deg, #5a4212, #3d2c0c); border-radius:4px; box-shadow:0 1px 0 rgba(255,255,255,0.25); }
+    .index { position:absolute; left:50%; top:-16px; width:0; height:0; margin-left:-9px; border-left:9px solid transparent; border-right:9px solid transparent; border-top:16px solid #d0342c; filter:drop-shadow(0 2px 2px rgba(0,0,0,0.7)); }
+    .controls { display:flex; flex-direction:column; gap:18px; min-width:0; }
+    .engraved { background:linear-gradient(180deg, var(--brass-hi), #b98f36 55%, #d1ab52); border:2px solid var(--brass-lo); padding:18px 20px; box-shadow:0 4px 0 #5a4212; display:flex; flex-direction:column; gap:6px; }
+    .lbl { font-family:'Cinzel', serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#4a3810; }
+    .pw { font:600 clamp(16px, 2.2vw, 26px)/1.3 'JetBrains Mono', ui-monospace, monospace; letter-spacing:.08em; color:var(--plate-ink); text-shadow:0 1px 0 rgba(255,255,255,0.5), 0 -1px 0 rgba(0,0,0,0.35); overflow-wrap:anywhere; min-height:1.3em; }
+    .bolts { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    .bolt { width:60px; height:12px; background:#4a4f57; border-radius:2px; box-shadow:inset 0 1px 2px rgba(0,0,0,0.7); overflow:hidden; }
+    .bolt i { display:block; height:100%; width:0; background:linear-gradient(180deg, var(--brass-hi), #a8822f); transition:width .5s cubic-bezier(.2,.9,.25,1); }
+    .bolt.on i { width:100%; }
+    .bolts span { font-family:'Cinzel', serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--brass); margin-left:6px; }
+    .tumblers { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:10px; }
+    .tumbler { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:10px 12px; background:var(--face); border:1px solid var(--edge); color:var(--text); box-shadow:inset 0 1px 0 rgba(255,255,255,0.06); cursor:pointer; font:12.5px 'Public Sans', sans-serif; letter-spacing:.06em; }
+    .tumbler b { font-family:'Cinzel', serif; font-weight:700; letter-spacing:.08em; }
+    .tumbler i { width:28px; height:14px; border-radius:7px; background:#3a3f46; position:relative; box-shadow:inset 0 1px 3px rgba(0,0,0,0.7); flex:none; }
+    .tumbler i::after { content:''; position:absolute; top:2px; left:2px; width:10px; height:10px; border-radius:50%; background:#8d9299; transition:left .2s; }
+    .tumbler[aria-pressed="true"] i { background:var(--brass-lo); } .tumbler[aria-pressed="true"] i::after { left:16px; background:#f0d48a; }
+    .lenrow { display:flex; align-items:center; gap:12px; font-family:'Cinzel', serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--brass); }
+    .lenrow input { flex:1; accent-color:var(--brass); min-width:0; }
+    .lenrow output { font:700 20px 'JetBrains Mono', monospace; color:#f2f0ea; min-width:2ch; text-align:right; }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; }
+    .brass { padding:12px 22px; border:2px solid var(--brass-lo); background:linear-gradient(180deg, var(--brass-hi), #b98f36); color:var(--plate-ink); font:700 13px 'Cinzel', serif; letter-spacing:.16em; text-transform:uppercase; box-shadow:0 4px 0 #5a4212; cursor:pointer; }
+    .brass:active { transform:translateY(3px); box-shadow:0 1px 0 #5a4212; }
+    .brass.dark { background:var(--face); color:var(--text); border-color:var(--edge); box-shadow:0 4px 0 #0d0f11; }
+    .card { margin-top:60px; background:var(--face); border:1px solid var(--edge); padding:28px 32px; box-shadow:inset 0 1px 0 rgba(255,255,255,0.06); }
+    .card h2 { margin:0 0 10px; font-family:'Cinzel', serif; font-size:22px; letter-spacing:.1em; color:var(--brass); }
+    .card p { margin:0 0 10px; font-size:14.5px; line-height:1.6; color:var(--muted); }
+    .card details { border-top:1px solid var(--edge); } .card summary { cursor:pointer; padding:10px 0; font-weight:600; font-size:14px; color:var(--text); }
+    .card a { color:var(--brass); }
+    .foot { margin-top:22px; font-family:'Cinzel', serif; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#7d828a; display:flex; flex-wrap:wrap; gap:8px 24px; }
+    .foot a { color:var(--brass); }
+    .tool-feedback { margin-top:18px; font-size:13px; color:var(--muted); }
+    .tool-feedback summary::before { color:var(--brass); }
+    @media (max-width: 820px) { :root { --d:260px; } .stage { grid-template-columns:1fr; gap:26px; margin-top:30px; } .tumblers { grid-template-columns:repeat(2, minmax(0, 1fr)); } .ring .num { font-size:11px; } .ring .tick { height:10px; } .ring .tick.s { height:5px; } main { padding:34px 16px 40px; } .plate { padding:14px 16px; } .card { padding:20px 18px; margin-top:34px; } .bolt { width:44px; } }
 
-        .tool-password-display {
-            position: relative;
-            display: flex; align-items: center;
-            gap: var(--crusher-spacing-3);
-            padding: var(--crusher-spacing-4);
-            border-radius: var(--crusher-radius-lg);
-            border: 1px solid var(--crusher-border-primary);
-            background: var(--crusher-background-muted);
-        }
-        .tool-password-value {
-            flex-grow: 1;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: var(--crusher-font-size-xl);
-            color: var(--crusher-text-primary);
-            letter-spacing: 0.05em;
-            word-break: break-all;
-        }
-        .tool-copy-icon-btn {
-            background: transparent;
-            border: 0;
-            padding: var(--crusher-spacing-1);
-            color: var(--crusher-text-secondary);
-            cursor: pointer;
-            transition: color var(--crusher-motion-duration-fast) var(--crusher-motion-easing-standard);
-        }
-        .tool-copy-icon-btn:hover { color: var(--crusher-color-brand-primary); }
-        .tool-copy-feedback {
-            position: absolute;
-            inset-block-start: -1.5rem;
-            inset-inline-end: 0;
-            font-size: var(--crusher-font-size-sm);
-            color: var(--crusher-color-brand-primary);
-            opacity: 0;
-            transition: opacity var(--crusher-motion-duration-fast) var(--crusher-motion-easing-standard);
-        }
-        .tool-copy-feedback[data-visible="true"] { opacity: 1; }
-
-        .tool-section { padding: var(--crusher-spacing-6); display: grid; gap: var(--crusher-spacing-5); }
-
-        .tool-length-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--crusher-spacing-2); }
-        .tool-length-label { font-weight: 500; color: var(--crusher-text-primary); }
-        .tool-length-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 700;
-            font-size: var(--crusher-font-size-2xl);
-            color: var(--crusher-color-brand-primary);
-        }
-
-        input[type="range"].tool-range {
-            -webkit-appearance: none; appearance: none;
-            width: 100%; block-size: 0.5rem;
-            background: var(--crusher-background-muted);
-            border: 1px solid var(--crusher-border-primary);
-            border-radius: var(--crusher-radius-full); outline: none;
-        }
-        input[type="range"].tool-range::-webkit-slider-thumb {
-            -webkit-appearance: none; appearance: none;
-            inline-size: 1.25rem; block-size: 1.25rem;
-            background: var(--crusher-color-brand-primary);
-            border: 2px solid var(--crusher-background-surface);
-            border-radius: var(--crusher-radius-full);
-            box-shadow: var(--crusher-shadow-sm);
-            cursor: pointer;
-        }
-        input[type="range"].tool-range::-moz-range-thumb {
-            inline-size: 1.25rem; block-size: 1.25rem;
-            background: var(--crusher-color-brand-primary);
-            border: 2px solid var(--crusher-background-surface);
-            border-radius: var(--crusher-radius-full);
-            box-shadow: var(--crusher-shadow-sm);
-            cursor: pointer;
-        }
-
-        .tool-checkbox-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
-            gap: var(--crusher-spacing-3);
-            padding-top: var(--crusher-spacing-2);
-        }
-        .tool-checkbox-row {
-            display: flex; align-items: center; gap: var(--crusher-spacing-2);
-        }
-        input[type="checkbox"].tool-checkbox {
-            inline-size: 1.15rem; block-size: 1.15rem;
-            accent-color: var(--crusher-color-brand-primary);
-            cursor: pointer;
-        }
-        .tool-checkbox-label { font-size: var(--crusher-font-size-sm); color: var(--crusher-text-secondary); cursor: pointer; }
-
-        .tool-error {
-            min-block-size: 1.25rem;
-            text-align: center;
-            font-size: var(--crusher-font-size-sm);
-            color: #ef4444;
-        }
-
-        .tool-action-block {
-            inline-size: 100%;
-            padding-block: var(--crusher-spacing-3);
-            padding-inline: var(--crusher-spacing-4);
-            border-radius: var(--crusher-radius-lg);
-            font-weight: 700;
-            font-size: var(--crusher-font-size-md);
-        }
-
-        .tool-feedback {
-            width: min(100%, 56rem);
-            margin: var(--crusher-spacing-8) auto var(--crusher-spacing-6);
-            padding-inline: var(--crusher-spacing-4);
-        }
-        .tool-feedback-trigger {
-            cursor: pointer;
-            padding: var(--crusher-spacing-2) var(--crusher-spacing-3);
-            font-size: var(--crusher-font-size-sm);
-            color: var(--crusher-text-secondary);
-            border-radius: var(--crusher-radius-md);
-            list-style: none;
-            display: inline-flex;
-            align-items: center;
-            gap: var(--crusher-spacing-2);
-            transition: color var(--crusher-motion-duration-fast) var(--crusher-motion-easing-standard);
-        }
-        .tool-feedback-trigger::-webkit-details-marker { display: none; }
-        .tool-feedback-trigger::before {
-            content: '+';
-            display: inline-block;
-            font-weight: 700;
-            color: var(--crusher-color-brand-primary);
-        }
-        .tool-feedback-details[open] .tool-feedback-trigger::before { content: '−'; }
-        .tool-feedback-trigger:hover { color: var(--crusher-color-brand-primary); }
-        .tool-feedback-form {
-            margin-top: var(--crusher-spacing-3);
-            padding: var(--crusher-spacing-4);
-            border: 1px solid var(--crusher-border-primary);
-            border-radius: var(--crusher-radius-lg);
-            background: var(--crusher-background-surface);
-            display: grid;
-            gap: var(--crusher-spacing-3);
-        }
-        .tool-feedback-field { display: grid; gap: var(--crusher-spacing-1); }
-        .tool-feedback-field > span {
-            font-size: var(--crusher-font-size-xs);
-            color: var(--crusher-text-secondary);
-            font-weight: 500;
-        }
-        .tool-feedback-submit {
-            padding-inline: var(--crusher-spacing-4);
-            padding-block: var(--crusher-spacing-2);
-        }
-        .tool-feedback-submit[disabled] { opacity: 0.6; cursor: not-allowed; }
-        .tool-feedback-status {
-            margin: 0;
-            min-block-size: 1.25rem;
-            font-size: var(--crusher-font-size-sm);
-            color: var(--crusher-text-secondary);
-        }
-        .tool-feedback-status[data-kind="ok"] { color: var(--crusher-color-brand-primary); }
-        .tool-feedback-status[data-kind="error"] { color: #dc2626; }
-        .tool-feedback-honey { position: absolute; left: -9999px; top: -9999px; opacity: 0; pointer-events: none; }
+    .tool-feedback summary { cursor:pointer; list-style:none; display:inline-flex; gap:8px; align-items:center; }
+    .tool-feedback summary::-webkit-details-marker { display:none; }
+    .tool-feedback summary::before { content:'+'; font-weight:700; }
+    .tool-feedback[open] summary::before { content:'\2212'; }
+    .tool-feedback form { display:grid; gap:10px; margin-top:12px; max-width:520px; }
+    .tool-feedback label { display:grid; gap:4px; font-size:12px; }
+    .tool-feedback textarea, .tool-feedback input[type="email"] { font:14px/1.5 inherit; padding:9px 11px; border:1px solid currentColor; background:transparent; color:inherit; border-radius:4px; }
+    .tool-feedback button { justify-self:start; padding:8px 16px; font:600 13px inherit; cursor:pointer; border:1px solid currentColor; background:transparent; color:inherit; border-radius:4px; }
+    .tool-feedback-honey { position:absolute; left:-9999px; top:-9999px; opacity:0; pointer-events:none; }
+    #tool-feedback-status { margin:0; min-height:1.2em; font-size:13px; }
+    #tool-feedback-status[data-kind="error"] { color:#c0392b; }
     </style>
 </head>
-<body class="crusher-tool-page">
+<body>
 
-    <main class="crusher-tool-shell">
-        <header class="crusher-tool-header">
-            <h1 class="crusher-tool-title">Secure Password Generator</h1>
-            <p class="crusher-tool-lede">Create strong, random passwords to protect your accounts.</p>
-        </header>
-
-        <div class="tool-stack">
-            <div class="tool-password-display">
-                <span id="password-display" class="tool-password-value"></span>
-                <button id="copy-btn" type="button" class="tool-copy-icon-btn" title="Copy Password" aria-label="Copy Password">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2Zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6ZM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1H2Z"/></svg>
-                </button>
-                <span id="copy-feedback" class="tool-copy-feedback">Copied!</span>
-            </div>
-
-            <section class="crusher-tool-surface tool-section">
-                <div>
-                    <div class="tool-length-row">
-                        <label for="length-slider" class="tool-length-label">Password Length</label>
-                        <span id="length-value" class="tool-length-value">16</span>
-                    </div>
-                    <input type="range" id="length-slider" min="8" max="32" value="16" class="tool-range">
-                </div>
-
-                <div class="tool-checkbox-grid">
-                    <div class="tool-checkbox-row">
-                        <input id="uppercase" type="checkbox" checked class="tool-checkbox">
-                        <label for="uppercase" class="tool-checkbox-label">Include Uppercase (A-Z)</label>
-                    </div>
-                    <div class="tool-checkbox-row">
-                        <input id="lowercase" type="checkbox" checked class="tool-checkbox">
-                        <label for="lowercase" class="tool-checkbox-label">Include Lowercase (a-z)</label>
-                    </div>
-                    <div class="tool-checkbox-row">
-                        <input id="numbers" type="checkbox" checked class="tool-checkbox">
-                        <label for="numbers" class="tool-checkbox-label">Include Numbers (0-9)</label>
-                    </div>
-                    <div class="tool-checkbox-row">
-                        <input id="symbols" type="checkbox" class="tool-checkbox">
-                        <label for="symbols" class="tool-checkbox-label">Include Symbols (!@#$)</label>
-                    </div>
-                </div>
-
-                <p id="error-msg" class="tool-error" role="status"></p>
-
-                <button id="generate-btn" type="button" class="crusher-tool-action tool-action-block">Generate Password</button>
-            </section>
+    <div class="rivet" style="left:14px;top:14px" aria-hidden="true"></div><div class="rivet" style="right:14px;top:14px" aria-hidden="true"></div><div class="rivet" style="left:14px;bottom:14px" aria-hidden="true"></div><div class="rivet" style="right:14px;bottom:14px" aria-hidden="true"></div>
+    <main>
+      <header class="plate"><h1>Secure Password Generator</h1><p class="sub">Spin the dial · take the key · nothing leaves the vault</p></header>
+      <div class="stage">
+        <div class="dialwrap"><div class="index" aria-hidden="true"></div><div id="ring" class="ring" aria-hidden="true"></div><button id="knob" class="knob" type="button" title="Spin the dial" aria-label="Spin the dial"></button></div>
+        <div class="controls">
+          <div class="engraved"><div class="lbl">Your key · engraved</div><div id="pw" class="pw" aria-live="polite"></div></div>
+          <div class="bolts" aria-label="Strength"><div class="bolt"><i></i></div><div class="bolt"><i></i></div><div class="bolt"><i></i></div><div class="bolt"><i></i></div><span id="strength">-</span></div>
+          <div class="tumblers">
+            <button class="tumbler set" type="button" data-set="upper" aria-pressed="true"><b>ABC</b><i></i></button>
+            <button class="tumbler set" type="button" data-set="lower" aria-pressed="true"><b>abc</b><i></i></button>
+            <button class="tumbler set" type="button" data-set="digit" aria-pressed="true"><b>123</b><i></i></button>
+            <button class="tumbler set" type="button" data-set="symbol" aria-pressed="false"><b>#$%</b><i></i></button>
+          </div>
+          <div class="lenrow"><label for="len">Length</label><input id="len" type="range" min="8" max="64" value="20"><output id="lenv" for="len">20</output></div>
+          <div class="actions"><button id="spin" class="brass" type="button">Spin the dial</button><button id="copy" class="brass dark" type="button">Take the key</button></div>
         </div>
+      </div>
+      <section class="card">
+        <h2>Strong, random, made on your machine</h2>
+        <p>Every spin draws from your browser's cryptographic random generator (crypto.getRandomValues), never a server. Choose the character sets, set the length, spin. The bolts show the strength estimate: four bolts thrown is well beyond what any online attack can brute-force.</p>
+        <p>Nothing you generate is stored or sent anywhere. Copy it straight into your password manager.</p>
+        <details><summary>How is strength measured?</summary><p>Bits of entropy: log2 of the character-set size times the length. 60 bits throws two bolts, 80 three, 100 all four.</p></details>
+        <details><summary>Why exclude symbols by default?</summary><p>Some sites reject them. Turn the tumbler on when the site allows them; it adds roughly six bits per character.</p></details>
+        <details><summary>Are look-alike characters avoided?</summary><p>Yes: 0, O, 1, l and I are left out of every set so a key you read off the plate types back correctly.</p></details>
+      </section>
+      <div class="foot"><span>Vault 07</span><a href="https://tools.muhammadhassaanjaved.com/">All tools</a></div>
+      <details class="tool-feedback ">
+      <summary>Suggest an improvement</summary>
+      <form id="tool-feedback-form" novalidate>
+        <label><span>What could be better?</span><textarea name="improvement" rows="3" required maxlength="2000" placeholder="Tell me what is missing or what could work better"></textarea></label>
+        <label><span>Your email (optional, only if you want a reply)</span><input type="email" name="replyto" maxlength="200" placeholder="your@email.com"></label>
+        <input type="text" name="botcheck" class="tool-feedback-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit">Send</button>
+        <p id="tool-feedback-status" role="status" aria-live="polite"></p>
+      </form>
+    </details>
     </main>
-
-    <a href="https://tools.muhammadhassaanjaved.com/" id="hub-bubble" class="crusher-tool-fab" title="View All Tools" target="_blank" rel="noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-        </svg>
-    </a>
-
-    <crusher-style-switcher
-      default-theme="minimal"
-      default-brand="#0ea5e9"
-      hide-themes
-      hide-theme-color>
-        <svg slot="mode-light-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/></svg>
-        <svg slot="mode-dark-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></svg>
-    </crusher-style-switcher>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/crusher-ui-kit@1.2.1/dist/crusher-ui.standalone.esm.js" integrity="sha384-49DxFeXn1ckPw9AmqDudkw1VT513Id+j1qJmkXCZBAiIaNechVSDTNnsKThtI54K" crossorigin="anonymous"></script>
-
     <script>
-        const passwordDisplay = document.getElementById('password-display');
-        const lengthSlider = document.getElementById('length-slider');
-        const lengthValue = document.getElementById('length-value');
-        const uppercaseCheck = document.getElementById('uppercase');
-        const lowercaseCheck = document.getElementById('lowercase');
-        const numbersCheck = document.getElementById('numbers');
-        const symbolsCheck = document.getElementById('symbols');
-        const generateBtn = document.getElementById('generate-btn');
-        const copyBtn = document.getElementById('copy-btn');
-        const copyFeedback = document.getElementById('copy-feedback');
-        const errorMsg = document.getElementById('error-msg');
 
-        const charSets = {
-            uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-            lowercase: 'abcdefghijklmnopqrstuvwxyz',
-            numbers: '0123456789',
-            symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
-        };
+const h = (tag, style, text, cls) => { const e = document.createElement(tag); if (style) e.style.cssText = style; if (text != null) e.textContent = text; if (cls) e.className = cls; return e; };
+const copyBtn = (btn, getText, label, done) => btn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(getText()); btn.textContent = done || 'Copied'; } catch (e) { btn.textContent = 'Select to copy'; } setTimeout(() => { btn.textContent = label; }, 1400); });
 
-        function getRandomInt(max) {
-            // Rejection sampling to remove modulo bias when 2^32 is not a multiple of max.
-            const range = 0x100000000;
-            const limit = range - (range % max);
-            const buf = new Uint32Array(1);
-            do {
-                window.crypto.getRandomValues(buf);
-            } while (buf[0] >= limit);
-            return buf[0] % max;
-        }
 
-        function generatePassword() {
-            const length = lengthSlider.value;
-            let charset = '';
-            let password = '';
-            errorMsg.textContent = '';
+    const ring = document.getElementById('ring'), pwEl = document.getElementById('pw'), len = document.getElementById('len'), lenv = document.getElementById('lenv'), strength = document.getElementById('strength'), bolts = [...document.querySelectorAll('.bolt')];
+    for (let i = 0; i < 100; i++) { const t = h('div', 'transform:rotate(' + (i * 3.6) + 'deg)', null, 'tick' + (i % 10 ? ' s' : '')); ring.appendChild(t); }
+    for (let i = 0; i < 10; i++) { const n = h('div', 'transform:rotate(' + (i * 36) + 'deg) translateY(calc(var(--d) / -2 + 30px))', String(i * 10), 'num'); ring.appendChild(n); }
+    const SETS = { upper: 'ABCDEFGHJKLMNPQRSTUVWXYZ', lower: 'abcdefghijkmnopqrstuvwxyz', digit: '23456789', symbol: '!@#$%^&*()-_=+[]{}<>?' };
+    let angle = 0;
+    const active = () => [...document.querySelectorAll('.set')].filter(b => b.getAttribute('aria-pressed') === 'true').map(b => b.dataset.set);
+    const gen = () => { const sets = active(); if (!sets.length) { pwEl.textContent = 'Turn on at least one tumbler'; bolts.forEach(b => b.classList.remove('on')); strength.textContent = '-'; return; } const pool = sets.map(s => SETS[s]).join(''); const n = parseInt(len.value, 10); const buf = new Uint32Array(n); crypto.getRandomValues(buf); let out = ''; for (let i = 0; i < n; i++) out += pool[buf[i] % pool.length]; pwEl.textContent = out; const bits = Math.round(n * Math.log2(pool.length)); const level = bits >= 100 ? 4 : bits >= 80 ? 3 : bits >= 60 ? 2 : bits >= 40 ? 1 : 0; bolts.forEach((b, i) => b.classList.toggle('on', i < level)); strength.textContent = bits + ' bits · ' + ['weak', 'fair', 'good', 'strong', 'vault'][level]; };
+    const spin = () => { angle += 540 + Math.floor(Math.random() * 360); ring.style.transform = 'rotate(' + angle + 'deg)'; let t = 0; const iv = setInterval(() => { gen(); if (++t > 5) clearInterval(iv); }, 160); };
+    document.getElementById('spin').addEventListener('click', spin); document.getElementById('knob').addEventListener('click', spin);
+    document.querySelectorAll('.set').forEach(b => b.addEventListener('click', () => { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); gen(); }));
+    len.addEventListener('input', () => { lenv.textContent = len.value; gen(); });
+    copyBtn(document.getElementById('copy'), () => pwEl.textContent, 'Take the key', 'Key taken');
+    gen();
 
-            if (uppercaseCheck.checked) charset += charSets.uppercase;
-            if (lowercaseCheck.checked) charset += charSets.lowercase;
-            if (numbersCheck.checked) charset += charSets.numbers;
-            if (symbolsCheck.checked) charset += charSets.symbols;
-
-            if (charset === '') {
-                errorMsg.textContent = 'Please select at least one character set.';
-                passwordDisplay.textContent = '';
-                return;
-            }
-
-            for (let i = 0; i < length; i++) {
-                const randomIndex = getRandomInt(charset.length);
-                password += charset[randomIndex];
-            }
-
-            passwordDisplay.textContent = password;
-        }
-
-        async function copyPassword() {
-            const password = passwordDisplay.textContent;
-            if (!password) return;
-            try {
-                await navigator.clipboard.writeText(password);
-            } catch {
-                const textarea = document.createElement('textarea');
-                textarea.value = password;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-            }
-            copyFeedback.dataset.visible = 'true';
-            setTimeout(() => { copyFeedback.dataset.visible = 'false'; }, 2000);
-        }
-
-        lengthSlider.addEventListener('input', (e) => {
-            lengthValue.textContent = e.target.value;
-        });
-
-        generateBtn.addEventListener('click', generatePassword);
-        copyBtn.addEventListener('click', copyPassword);
-
-        generatePassword();
+(function() {
+  const KEY = '30e570c5-aeeb-439d-8a8a-bd2516a5dc5d';
+  const ENDPOINT = 'https://api.web3forms.com/submit';
+  const form = document.getElementById('tool-feedback-form');
+  const status = document.getElementById('tool-feedback-status');
+  if (!form || !status) return;
+  const toolName = (document.title || 'tool').trim();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    fd.set('access_key', KEY);
+    fd.set('subject', '[' + toolName + '] Improvement suggestion');
+    fd.set('from_name', toolName);
+    const btn = form.querySelector('button[type="submit"]');
+    const orig = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Sending';
+    status.textContent = ''; delete status.dataset.kind;
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } });
+      const data = await res.json();
+      if (data.success) { form.reset(); status.textContent = 'Thanks, your suggestion is in.'; status.dataset.kind = 'ok'; }
+      else { status.textContent = data.message || 'Sorry, that did not go through. Try again later?'; status.dataset.kind = 'error'; }
+    } catch (err) { status.textContent = 'Network error. Try again?'; status.dataset.kind = 'error'; }
+    finally { btn.disabled = false; btn.textContent = orig; }
+  });
+})();
     </script>
-
-    <section class="tool-feedback" aria-label="Tool feedback">
-        <details class="tool-feedback-details">
-            <summary class="tool-feedback-trigger">Suggest an improvement</summary>
-            <form id="tool-feedback-form" class="tool-feedback-form" novalidate>
-                <label class="tool-feedback-field">
-                    <span>What could be better?</span>
-                    <textarea name="improvement" rows="3" required maxlength="2000" class="crusher-tool-control" placeholder="Tell me what's missing or what could work better…"></textarea>
-                </label>
-                <label class="tool-feedback-field">
-                    <span>Your email (optional, only if you want a reply)</span>
-                    <input type="email" name="replyto" maxlength="200" class="crusher-tool-control" placeholder="your@email.com">
-                </label>
-                <input type="text" name="botcheck" class="tool-feedback-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-                <div>
-                    <button type="submit" class="crusher-tool-action tool-feedback-submit">Send</button>
-                </div>
-                <p id="tool-feedback-status" class="tool-feedback-status" role="status" aria-live="polite"></p>
-            </form>
-        </details>
-    </section>
-
-    <script>
-        (function() {
-            const KEY = '30e570c5-aeeb-439d-8a8a-bd2516a5dc5d';
-            const ENDPOINT = 'https://api.web3forms.com/submit';
-            const form = document.getElementById('tool-feedback-form');
-            const status = document.getElementById('tool-feedback-status');
-            if (!form || !status) return;
-            const toolName = (document.title || 'tool').trim();
-            const subject = '[' + toolName + '] Improvement suggestion';
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const fd = new FormData(form);
-                fd.set('access_key', KEY);
-                fd.set('subject', subject);
-                fd.set('from_name', toolName);
-                const btn = form.querySelector('button[type="submit"]');
-                const orig = btn.textContent;
-                btn.disabled = true; btn.textContent = 'Sending…';
-                status.textContent = ''; delete status.dataset.kind;
-                try {
-                    const res = await fetch(ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } });
-                    const data = await res.json();
-                    if (data.success) {
-                        form.reset();
-                        status.textContent = 'Thanks — your suggestion is in.';
-                        status.dataset.kind = 'ok';
-                    } else {
-                        status.textContent = data.message || 'Sorry, that did not go through. Try again later?';
-                        status.dataset.kind = 'error';
-                    }
-                } catch (err) {
-                    status.textContent = 'Network error. Try again?';
-                    status.dataset.kind = 'error';
-                } finally {
-                    btn.disabled = false; btn.textContent = orig;
-                }
-            });
-        })();
-    </script>
-
 </body>
 </html>
